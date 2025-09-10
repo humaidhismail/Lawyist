@@ -16,7 +16,7 @@ export function Footer() {
           >
             <div className="flex items-center space-x-2 mb-4">
               <img
-              src="/LAWYIST.PNG" 
+              src="/LAWYIST.png" 
               alt="The Lawyist Logo"
               className="h-10 w-auto object-contain" // same height as old icon
             />
