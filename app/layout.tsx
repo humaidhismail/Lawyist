@@ -7,7 +7,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Sterling & Associates - Premium Legal Services",
+  title: "The Lawyist - Premium Legal Services",
   description: "Expert legal counsel and consultancy services. Trusted by clients for over two decades.",
   generator: "v0.app",
 }
