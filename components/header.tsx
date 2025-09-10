@@ -34,8 +34,8 @@ export function Header() {
           >
             <a href="#home" className="flex items-center space-x-2">
               <img
-                src="/lawyist.png" // replace with your logo path
-                alt="Sterling & Associates Logo"
+                src="/LAWYIST.png" // replace with your logo path
+                alt="lawyist Logo"
                 className="h-10 w-auto"
               />
             </a>
