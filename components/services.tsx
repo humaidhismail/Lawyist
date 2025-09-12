@@ -20,7 +20,6 @@ function IconBadge({ Icon, index }: { Icon: IconType; index: number }) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    // Wrapper: entrance only (no opacity changes)
     <motion.div
       initial={{ y: 16, scale: 0.95 }}
       whileInView={{ y: 0, scale: 1 }}
@@ -29,7 +28,6 @@ function IconBadge({ Icon, index }: { Icon: IconType; index: number }) {
       className="relative inline-flex items-center justify-center rounded-xl p-0"
       aria-hidden="true"
     >
-      {/* Inner: continuous float using tween (ok with 3+ keyframes) */}
       <motion.div
         animate={prefersReducedMotion ? {} : { y: [-3, 0, -3] }}
         transition={prefersReducedMotion ? {} : { duration: 3, repeat: Infinity, ease: "easeInOut", type: "tween" }}
@@ -46,14 +44,12 @@ function IconBadge({ Icon, index }: { Icon: IconType; index: number }) {
 
 export function Services() {
   return (
-    <section id="services" className="py-24 bg-background">
+    <section id="services" className="py-24 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
           {/* Sticky intro */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
-             
-
               <h2 className="mt-5 font-serif text-4xl md:text-5xl font-bold leading-tight">
                 Expert Legal <span className="text-[#D4AF37]">Services</span>
               </h2>

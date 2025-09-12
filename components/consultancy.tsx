@@ -90,7 +90,7 @@ export function Consultancy() {
       id="consultancy"
       // define deep teal accent once
       style={{ ["--accent" as any]: "#073C3C" }}
-      className="py-24 bg-muted/10 [background-image:radial-gradient(1200px_600px_at_50%_-10%,var(--accent)/0.08,transparent)]"
+      className="py-24 bg-gray-50"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
