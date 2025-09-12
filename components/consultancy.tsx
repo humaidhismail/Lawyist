@@ -1,13 +1,27 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, ComponentType } from "react"
+import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Calendar, Users, Target, ArrowRight } from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  BookOpen,
+  Calendar,
+  Users,
+  Target,
+  ArrowRight,
+} from "lucide-react"
 import BookConsultationModal from "@/components/BookConsultationModal"
 
-const consultancyServices = [
+type IconType = ComponentType<{ className?: string }>
+
+const consultancyServices: { icon: IconType; title: string; description: string }[] = [
   {
     icon: Target,
     title: "Strategic Planning",
@@ -34,89 +48,139 @@ const consultancyServices = [
   },
 ]
 
+function AccentIconBadge({ Icon, index = 0 }: { Icon: IconType; index?: number }) {
+  const prefersReducedMotion = useReducedMotion()
+  return (
+    <motion.div
+      initial={{ y: 16, scale: 0.96 }}
+      whileInView={{ y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 18,
+        delay: index * 0.06,
+      }}
+      className="relative inline-flex items-center justify-center rounded-xl p-0"
+      aria-hidden="true"
+    >
+      <motion.div
+        animate={prefersReducedMotion ? {} : { y: [-3, 0, -3] }}
+        transition={
+          prefersReducedMotion
+            ? {}
+            : { duration: 3, repeat: Infinity, ease: "easeInOut", type: "tween" }
+        }
+        className="inline-flex items-center justify-center rounded-xl p-4
+                   bg-white/70 dark:bg-neutral-900/60 backdrop-blur-md
+                   border [border-color:var(--accent)/0.3] shadow-sm"
+      >
+        <span className="absolute inset-0 rounded-xl ring-1 ring-inset [--tw-ring-color:var(--accent)/0.25] pointer-events-none" />
+        <Icon className="h-7 w-7 [color:var(--accent)]" />
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export function Consultancy() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <section id="consultancy" className="py-20 bg-muted/30">
+    <section
+      id="consultancy"
+      // define deep teal accent once
+      style={{ ["--accent" as any]: "#073C3C" }}
+      className="py-24 bg-muted/10 [background-image:radial-gradient(1200px_600px_at_50%_-10%,var(--accent)/0.08,transparent)]"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-6">
-              Legal Consultancy
-              <span className="block text-primary">& Strategic Guidance</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Beyond traditional legal services, we offer comprehensive consultancy to help you navigate complex legal
-              landscapes and make informed strategic decisions.
-            </p>
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground">Proactive legal risk assessment</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground">Customized compliance frameworks</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span className="text-foreground">Strategic business planning support</span>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          {/* Sticky intro */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-24">
+              <h2 className="mt-5 font-serif text-4xl md:text-5xl font-bold leading-tight text-foreground">
+                Legal Consultancy
+                <span className="block [color:var(--accent)]">& Strategic Guidance</span>
+              </h2>
 
-            {/* Open modal on click */}
-            <Button
-              size="lg"
-              onClick={() => setIsModalOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground group"
-            >
-              Book Consultancy Session
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
+              <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
+                Beyond traditional legal services, we help you navigate complex
+                landscapes and make confident, strategic decisions.
+              </p>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-          >
-            {consultancyServices.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+              <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+                <div className="rounded-xl border [border-color:var(--accent)/0.3] bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
+                  <div className="font-semibold">Risk-First</div>
+                  <div className="text-muted-foreground">Proactive assessment</div>
+                </div>
+                <div className="rounded-xl border [border-color:var(--accent)/0.3] bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
+                  <div className="font-semibold">Compliance-Ready</div>
+                  <div className="text-muted-foreground">Clear frameworks</div>
+                </div>
+              </div>
+
+              <Button
+                size="lg"
+                onClick={() => setIsModalOpen(true)}
+                className="mt-8 [background-color:var(--accent)] hover:[background-color:color-mix(in oklab,var(--accent) 90%, black 10%)] text-white group focus:outline-none focus:ring-2 focus:[--tw-ring-color:var(--accent)/0.5]"
               >
-                <Card className="h-full hover:shadow-md transition-shadow duration-300 border-border">
-                  <CardHeader className="pb-3">
-                    <div className="mb-3 p-2 rounded-lg bg-primary/10 w-fit">
-                      <service.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-lg font-serif text-foreground">{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-muted-foreground text-sm leading-relaxed">
-                      {service.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+                Book Consultancy Session
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+            >
+              {consultancyServices.map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  initial={{ y: 20, scale: 0.98 }}
+                  whileInView={{ y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                >
+                  <Card
+                    tabIndex={0}
+                    className="group h-full overflow-hidden rounded-2xl
+                               border [border-color:var(--accent)/0.3] bg-white/75 dark:bg-neutral-900/60
+                               backdrop-blur-md transition-all duration-400
+                               hover:[border-color:var(--accent)] hover:shadow-xl hover:shadow-[var(--accent)/0.15]
+                               focus:outline-none focus:ring-2 focus:[--tw-ring-color:var(--accent)/0.5]"
+                  >
+                    <div className="h-1 w-full bg-gradient-to-r from-[var(--accent)] via-[color-mix(in oklab,var(--accent) 70%, transparent)] to-transparent" />
+
+                    <CardHeader className="text-left pb-3">
+                      <div className="mb-4">
+                        <AccentIconBadge Icon={service.icon} index={index} />
+                      </div>
+                      <CardTitle className="text-lg font-serif transition-colors group-hover:[color:var(--accent)]">
+                        {service.title}
+                      </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="pt-0">
+                      <CardDescription className="text-sm leading-relaxed text-muted-foreground">
+                        {service.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Modal mount */}
-      {isModalOpen && <BookConsultationModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <BookConsultationModal onClose={() => setIsModalOpen(false)} />
+      )}
     </section>
   )
 }
