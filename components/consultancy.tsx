@@ -88,7 +88,6 @@ export function Consultancy() {
   return (
     <section
       id="consultancy"
-      // define deep teal accent once
       style={{ ["--accent" as any]: "#073C3C" }}
       className="py-24 bg-gray-50"
     >
@@ -106,17 +105,6 @@ export function Consultancy() {
                 Beyond traditional legal services, we help you navigate complex
                 landscapes and make confident, strategic decisions.
               </p>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-xl border [border-color:var(--accent)/0.3] bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
-                  <div className="font-semibold">Risk-First</div>
-                  <div className="text-muted-foreground">Proactive assessment</div>
-                </div>
-                <div className="rounded-xl border [border-color:var(--accent)/0.3] bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
-                  <div className="font-semibold">Compliance-Ready</div>
-                  <div className="text-muted-foreground">Clear frameworks</div>
-                </div>
-              </div>
 
               <Button
                 size="lg"

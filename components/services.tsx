@@ -57,17 +57,6 @@ export function Services() {
               <p className="mt-4 text-muted-foreground text-lg leading-relaxed">
                 Premium, client-focused counsel across corporate, contracts, IP, and litigation—designed to protect your interests and move your business forward.
               </p>
-
-              <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-xl border border-[#D4AF37]/30 bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
-                  <div className="font-semibold">10+ Years</div>
-                  <div className="text-muted-foreground">Combined Experience</div>
-                </div>
-                <div className="rounded-xl border border-[#D4AF37]/30 bg-white/60 dark:bg-neutral-900/60 px-4 py-3 backdrop-blur">
-                  <div className="font-semibold">End-to-End</div>
-                  <div className="text-muted-foreground">From Advisory to Trial</div>
-                </div>
-              </div>
             </div>
           </div>
 
